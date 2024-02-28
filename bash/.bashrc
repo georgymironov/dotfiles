@@ -36,9 +36,8 @@ fi
 _hostname=$(hostname | awk -F '' '{if (NF > 20) {print substr($0, 0, 21)"..."} else print $0}')
 PS1="${BOLD}${HOST_COLOR}\u@$_hostname ${GREY}\D{%T} ${RESET}${BOLD}[\w]${GREY}\$(__git_ps1)${LIGHT_BLUE}\n#${RESET} "
 
-command -v fdfind &>/dev/null && alias fd='fdfind'
-command -v fd &>/dev/null && alias fd='fd --hidden --no-ignore --follow' || alias fd='find . -name'
-command -v rg &>/dev/null && alias rg='rg --hidden --no-ignore --follow --smart-case'
+type fdfind &>/dev/null && alias fd='fdfind --hidden --no-ignore --follow' || alias fd='find . -name'
+type rg &>/dev/null && alias rg='rg --hidden --no-ignore --follow --smart-case'
 
 alias ls='ls --color=auto -hAF'
 alias ll='ls -l'
@@ -55,7 +54,9 @@ alias scp='scp -r'
 alias cl='clear'
 alias rsync='rsync -a -v -h'
 alias k='kubectl'
-alias bazel='bazelisk'
+
+type bazelisk &>/dev/bull && alias bazel='bazelisk'
+alias b='bazel'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
